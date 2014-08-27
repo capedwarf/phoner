@@ -47,14 +47,14 @@ public class SyncEndpoint {
     }
 
     @ApiMethod(name = "sync.register", httpMethod = ApiMethod.HttpMethod.POST)
-    public Result register(@Named("username") String username) {
-        return dao.register(username) > 0 ? Result.OK : Result.FAILURE;
+    public Response register(@Named("username") String username) {
+        return new Response(dao.register(username));
     }
 
     @ApiMethod(name = "sync.push", httpMethod = ApiMethod.HttpMethod.PUT)
-    public Result push(@Named("username") String username, Contact contact) {
+    public Response push(@Named("username") String username, Contact contact) {
         dao.addContact(username, contact);
-        return Result.OK;
+        return Response.OK;
     }
 
     @ApiMethod(name = "sync.contacts", httpMethod = ApiMethod.HttpMethod.GET)
